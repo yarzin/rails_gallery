@@ -1,0 +1,185 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Galleries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @galleries.each do |gallery| %>
+      <tr>
+        <td>
+          <%= image_tag gallery.photo.url(:medium) %>
+        </td>
+        <td><%= link_to 'Show', gallery %></td>
+        <td><%= link_to 'Edit', edit_gallery_path(gallery) %></td>
+        <td><%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+  <title>Mobile demo by yZin</title>
+  <meta charset='utf-8'>
+  <%= stylesheet_link_tag asset_path('galleries.scss'), media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag asset_path('slider.scss'), media: 'all', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id='width-page'>
+  <header id='header'>
+    <div class='center'>
+      <nav id='main-menu'>
+        <ul>
+          <li class='active'>
+            <a href='#width-page'>
+              <span>Галерея</span>
+            </a>
+          </li>
+          <li>
+            <a href='#mobile'>
+              <span>Телефони</span>
+            </a>
+          </li>
+          <li>
+            <a href='#tablet'>
+              <span>Планшети</span>
+            </a>
+          </li>
+          <li>
+            <a href='#contact'>
+              <span>Контакти</span>
+            </a>
+          </li>
+          <li><% if user_signed_in? %>
+                <span>Здравствуйте, <%= current_user.email %></span>
+                <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+            <% else %>
+                <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
+            <% end %>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div id='content'>
+    <section class='row'>
+      <div class='center'>
+        <h1>Історія мобільних пристроїв</h1>
+        <strong class='subHeading'>мобільні телефони, планшети та інші електронні пристрої</strong>
+        <div class="gallery">
+          <ul id="slides">
+            <li class="slide showing">
+              <%= image_tag asset_path("img-gallery.jpg") %>
+            </li>
+            <li class="slide">
+              <%= image_tag asset_path("img-gallery2.jpg") %>
+            </li>
+            <li class="slide">
+              <%= image_tag asset_path("img-gallery3.jpg") %>
+            </li>
+          </ul>
+         </div>
+      </div>
+      <%= link_to 'New photo', new_gallery_path %>
+    </section>
+    <section class='row grey' id='mobile'>
+      <div class='center'>
+        <h1>Мобільні телефони</h1>
+        <strong class='subHeading'>Я виникли мобільні телефони?</strong>
+        <div class='columns'>
+          <div class='half'>
+            <div class="imgHolder alignLeft">
+              <%= image_tag asset_path("content01.jpg") %>
+            </div>
+            <p>Ідея створення мобільного бездротового пристрою почала будоражити уми вчених відразу після появи стаціонарних телефонних апаратів. Чималу роль у цьому процесі грав і інтерес військових до цього питання. Перші радіотелефонні апарати були використані у військових цілях - в поїздах Берлін-Гамбург, в 1926 році..</p>
+            <p>потім більш просунуті моделі використовувалися німецькими танкістами, під час другої світової війни.</p>
+            <p>Ідея почала набувати більш чіткої форми в грудні 1947 року.</p>
+            <p>В лабораторії компанії Bell Labs, два інженера, Дуглас Х. Ринг і Рей Янг, запропонували концепцію гексагональної мережі. Але це ще не було мережею. Пізніше, інженер цієї ж компанії, Філіп Т. Портер запропонував вишки приймально-передавачів в кутах гексагональной соти.</p>
+            <p>І ось, в 1967 році з'явилася перша, що діє поза лабораторією, модель переносного мобільного апарата. Першим телефонами необхідно було перебувати в межах однієї соти під час виконання дзвінка. При переході з соти на соту зв'язок втрачався.</p>
+          </div>
+          <div class='half'>
+            <div class='imgHolder fullWidth'>
+              <%= image_tag asset_path("content02.jpg") %>
+            </div>
+            <p>Цю проблему вирішив в 1970 році Амос Едвард Джоел, він розробив автоматичну систему передачі дзвінка між стільниками, що в свою чергу дозволило пересуватися із зони дії однієї соти в іншу, при цьому не перериваючи розмову. В кінці 1971 року компанією «AT &amp; T» було надіслано запит на надання послуг щодо забезпечення мобільного зв'язку в Федеральну комісію зв'язку США.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class='row' id='tablet'>
+      <div class='center'>
+        <h1>Планшетні пристрої</h1>
+        <strong class='subHeading'>Історія виникнення планшетних пристроїв</strong>
+        <div class='columns'>
+          <div class='oneThird'>
+            <div class='imgHolder fullWidth'>
+              <%= image_tag asset_path("content03.jpg") %>
+            </div>
+            <p>Роки 90-ті плодоносять компанією Pencept,яка розробляє перший комп'ютер який керується екраном за допомогою дотику або спеціального пера, на відміну від миші або клавіатури які були невід'ємною частиною тогочасних комп'ютерів.Цей комп'ютер працює на операційній системі МС-ДОС.</p>
+          </div>
+          <div class='oneThird'>
+            <p>В кінці 90-тих років з'являється перший планшет,який поступив в продаж,–це GriDPad, який працює також на МС-ДОС. 1991 рік приносить прем'єри комп'ютерів Momenta Pentop i NCR 3125 а також операційну систему PenPoint OS (розроблену компанією  Go Corporation).В цей саме період був сконструйований Apple Newton.Презентація якого відбулася у 1993 році.</p>
+          </div>
+          <div class='oneThird'>
+            <div class='imgHolder alignLeft'>
+              <%= image_tag asset_path("content04.jpg") %>
+            </div>
+            <p>ОС PenPoint в найближчих роках було встановлено на комп'ютери ІБМ,Fujitsu а також AT&amp;T. Відповіддю Microsoft на операційну систему GO Corporation є Windows for Pen Computing.Операційна система Windows,мала екранну клавіатуру,систему розпізнання рукописного вводу та була пристосована для обслуговування стилусом. Запрезентований в 1993 році IBM Simon, це плід спільної роботи IBM  а також фірми BellSouth.Simon є прототипом усіх IBM Simon-перший смартфонсьогоднішніх смартфонів – цей пристрій був аналоговим стільниковим телефоном,який мав сенсорний екран і обслуговувався за допомогою стилуса.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class='row grey' id='contact'>
+      <div class='center'>
+        <h1>Наші контакти</h1>
+        <strong class='subHeading'>Для того щоб звязатись з нами заповніть форму</strong>
+        <div class='columns'>
+          <div class='half'>
+            <form action='#' class='form'>
+              <fieldset>
+                <h2>форма відгуку</h2>
+                <div class='formRow'>
+                  <div class='textField'>
+                    <input placeholder='Your name ...' type='text'>
+                  </div>
+                </div>
+                <div class='formRow'>
+                  <div class='textField'>
+                    <input placeholder='Your Email ...' type='text'>
+                  </div>
+                </div>
+                <div class='formRow'>
+                  <div class='textField'>
+                    <textarea cols='20' placeholder='Your Email ...' rows='4'></textarea>
+                  </div>
+                </div>
+                <div class='formRow'>
+                  <button class='btnSmall btn submit right'>
+                    <span>Відправити повідомлення</span>
+                  </button>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <footer id='footer'>
+    <div class='center'>
+      <span class='copy'>створено by yZin</span>
+    </div>
+  </footer>
+</div>
+<%= javascript_include_tag "slider", "data-turbolinks-track" => true %>
+</body>
+</html>
