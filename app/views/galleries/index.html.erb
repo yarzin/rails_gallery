@@ -1,28 +1,20 @@
 <p id="notice"><%= notice %></p>
-
 <h1>Listing Galleries</h1>
-
 <table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @galleries.each do |gallery| %>
+ <tbody>
+  <% @galleries.each do |gallery| %>
       <tr>
         <td>
-          <%= image_tag gallery.photo.url(:medium) %>
+          <!--<%= image_tag gallery.photo.url(:medium) %>-->
         </td>
         <td><%= link_to 'Show', gallery %></td>
         <td><%= link_to 'Edit', edit_gallery_path(gallery) %></td>
         <td><%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 <br>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,22 +67,16 @@
       <div class='center'>
         <h1>Історія мобільних пристроїв</h1>
         <strong class='subHeading'>мобільні телефони, планшети та інші електронні пристрої</strong>
-        <div class="gallery">
-          <ul id="slides">
-            <li class="slide showing">
-              <%= image_tag asset_path("img-gallery.jpg") %>
-            </li>
-            <li class="slide">
-              <%= image_tag asset_path("img-gallery2.jpg") %>
-            </li>
-            <li class="slide">
-              <%= image_tag asset_path("img-gallery3.jpg") %>
-            </li>
-          </ul>
-         </div>
+        <% @galleries.each do |gallery| %>
+            <div class="slides" id="slides">
+                <div class="slide showing">
+                  <%= image_tag gallery.photo.url(:medium) %>
+                </div>
+        <% end %>
+        </div>
       </div>
-      <%= link_to 'New photo', new_gallery_path %>
     </section>
+    <%= link_to 'New photo', new_gallery_path %>
     <section class='row grey' id='mobile'>
       <div class='center'>
         <h1>Мобільні телефони</h1>
