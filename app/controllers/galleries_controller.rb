@@ -1,6 +1,11 @@
 class GalleriesController < ApplicationController
+  #load_and_authorize_resource
+
   before_action :set_gallery, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+
+
+
   #before_action :user_admin?
   # GET /galleries
   # GET /galleries.json
@@ -26,7 +31,7 @@ class GalleriesController < ApplicationController
   # POST /galleries.json
   def create
     @gallery = Gallery.new(gallery_params)
-
+    #@gallery = current_user.gallery.new(params[:post])
     respond_to do |format|
       if @gallery.save
         format.html { redirect_to @gallery, notice: 'Gallery was successfully created.' }

@@ -4,13 +4,17 @@
  <tbody>
   <% @galleries.each do |gallery| %>
       <tr>
-        <td>
-          <!--<%= image_tag gallery.photo.url(:medium) %>-->
-        </td>
+        <td><!--<%= image_tag gallery.photo.url(:medium) %>--></td>
+            <% if can? :read, gallery %>
         <td><%= link_to 'Show', gallery %></td>
+        <% end %>
+            <% if can? :update, gallery %>
         <td><%= link_to 'Edit', edit_gallery_path(gallery) %></td>
+        <% end %>
+            <% if can? :destroy, gallery %>
         <td><%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <% end %>
+        </tr>
   <% end %>
   </tbody>
 </table>
@@ -76,7 +80,9 @@
         </div>
       </div>
     </section>
+    <% if can? :create, Gallery %>
     <%= link_to 'New photo', new_gallery_path %>
+    <% end %>
     <section class='row grey' id='mobile'>
       <div class='center'>
         <h1>Мобільні телефони</h1>

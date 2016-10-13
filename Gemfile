@@ -17,6 +17,7 @@ gem "paperclip", "~> 5.0.0"
 gem 'devise'
 gem 'simple_form'
 gem 'devise-bootstrap-views'
+#gem 'bootstrap-sass'
 gem 'pg'
 gem 'cancancan', '~> 1.10'
 # Use jquery as the JavaScript library
